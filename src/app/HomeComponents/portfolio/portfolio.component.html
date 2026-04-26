@@ -1,39 +1,47 @@
 <div class="section bg-dark-2">
-  <div class="header-text position-relative">
-    <h2 class="text-resize text-white w-100">PORTFOLIO</h2>
-    <p class="text-ontop text-white w-100 mt p-vw">
-      My Work
-      <span class="heading-separator-line border-bottom border-3 border-primary d-block mx-auto"></span>
-    </p>
+
+  <div class="section-header reveal">
+    <span class="section-tag">My Work</span>
+    <h2 class="section-bg-text">PROJECTS</h2>
+    <h3 class="section-title">Portfolio</h3>
+    <div class="section-line"></div>
   </div>
 
-  <div class="container m-t-2">
-      <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let project of projects">
-            <div class="content">
-              <a data-toggle="modal" data-target="#exampleModalCenter" class="pointer" (click)="setImage(project)">
-                <div class="content-overlay"></div>
-                <img class="content-image" src="{{project.mainImage}}" />
-                <div class="content-details fadeIn-bottom">
-                  <h3 class="content-title">{{project.name}}</h3>
-                </div>
-              </a>
-            </div>
+  <div class="projects-grid reveal">
+    <div class="project-card"
+         *ngFor="let project of projects; let i = index"
+         data-toggle="modal" data-target="#exampleModalCenter"
+         (click)="setImage(project)">
+      <div class="card-img-wrap">
+        <span class="card-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+        <img class="card-img" [src]="project.mainImage" [alt]="project.name" />
+        <div class="card-overlay">
+          <div class="overlay-content">
+            <span class="overlay-icon"><i class="bi bi-eye-fill"></i></span>
+            <h4 class="overlay-title">{{ project.name }}</h4>
+            <span class="overlay-pill">View Project</span>
+          </div>
         </div>
       </div>
+      <div class="card-footer">
+        <span class="card-name">{{ project.name }}</span>
+        <i class="bi bi-arrow-up-right card-arrow"></i>
+      </div>
+    </div>
   </div>
+
 </div>
 
-
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
+    <div class="modal-content modal-dark">
+      <div class="modal-body p-0">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item" [ngClass]="{'active' : i === 0}" *ngFor="let image of Images; let i=index">
-              <img class="d-block w-100 popup-image" src="{{image}}" alt="{{i}}">
+            <div class="carousel-item" [ngClass]="{'active': i === 0}"
+                 *ngFor="let image of Images; let i = index">
+              <img class="d-block w-100 popup-image" [src]="image" [alt]="'slide-' + i">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

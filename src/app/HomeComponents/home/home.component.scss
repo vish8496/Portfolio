@@ -1,0 +1,8 @@
+.section { }
+
+.site-footer { background: #060d1a; border-top: 1px solid rgba(255,255,255,0.05); padding: 1.4rem 3rem; }
+.footer-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.6rem; font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+.footer-name { font-family: 'Playfair Display', serif; font-weight: 700; background: linear-gradient(90deg, #20c997, #e8823a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.footer-sep { opacity: 0.2; }
+.footer-copy { color: rgba(255,255,255,0.2); }
+.stack-pill { display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 0.1rem 0.5rem; font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.35); margin-left: 0.25rem; transition: border-color 0.3s, color 0.3s; &:hover { border-color: #20c997; color: #20c997; } }

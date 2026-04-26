@@ -1,44 +1,50 @@
-.nav-bar{
-  margin-top: 30px;
-  text-align: center;
-}
+.nav-bar { display: flex; flex-direction: column; align-items: center; padding: 2rem 0 1.5rem; height: 100%; box-sizing: border-box; }
 
-.rounded-circle
-{
-  border-radius: 50%;
+.profile-wrap {
+  position: relative; width: 110px; height: 110px; border-radius: 50%; padding: 3px;
+  background: linear-gradient(135deg, #20c997, #e8823a, #6161c7, #20c997); background-size: 300% 300%;
+  animation: grad-rot 4s ease infinite; flex-shrink: 0;
+  &::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(32,201,151,0.25); animation: ring-pulse 2.5s ease-in-out infinite; }
+  &::after  { content: ''; position: absolute; inset: -16px; border-radius: 50%; border: 1px solid rgba(232,130,58,0.12); animation: ring-pulse 2.5s 1.25s ease-in-out infinite; }
 }
+@keyframes grad-rot { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes ring-pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.06); opacity: 0.2; } }
 
-.navb{
-  list-style: none;
-  margin: 80px 0;
-  padding: 0;
+.profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; border: 3px solid #060d1a; transition: transform 0.4s ease; &:hover { transform: scale(1.06); } }
 
+.nav-name { margin: 1rem 0 0.2rem; font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.04em; text-align: center; }
+.nav-title { font-size: 0.65rem; color: #20c997; text-transform: uppercase; letter-spacing: 0.2em; margin: 0 0 0.8rem; text-align: center; animation: tag-glow 3s ease-in-out infinite; }
+@keyframes tag-glow { 0%, 100% { text-shadow: 0 0 8px rgba(32,201,151,0.4); } 50% { text-shadow: 0 0 20px rgba(32,201,151,0.9); } }
+
+.nav-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); margin-bottom: 1rem; position: relative; overflow: visible;
+  &::after { content: ''; position: absolute; top: 50%; transform: translateY(-50%); left: 0; width: 6px; height: 6px; border-radius: 50%; background: #20c997; box-shadow: 0 0 8px #20c997; animation: scan 3s linear infinite; }
 }
+@keyframes scan { 0% { left: 0%; opacity: 1; } 100% { left: 100%; opacity: 0; } }
+
+.navb { list-style: none; padding: 0; margin: 0; width: 100%; }
+.navb li { width: 100%; }
 
 a {
-  font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    text-decoration: none;
-    line-height: 45px;
-    display: block;
-    transition: all .3s ease;
-    text-transform: capitalize;
-    cursor: pointer;
+  font-size: 0.83rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; line-height: 1;
+  padding: 0.65rem 1.4rem; display: flex; align-items: center; gap: 0.65rem;
+  border-radius: 8px; margin: 0.15rem 0.5rem; transition: all 0.3s cubic-bezier(0.22,1,0.36,1); position: relative;
+  &:hover { color: #fff; background: rgba(255,255,255,0.04); padding-left: 1.7rem; .nav-icon { transform: scale(1.2) rotate(-5deg); color: #20c997; } }
+  &.active {
+    color: #20c997; background: rgba(32,201,151,0.08); padding-left: 1.7rem;
+    &::before { content: ''; position: absolute; left: 0; top: 15%; height: 70%; width: 3px; background: linear-gradient(180deg, #20c997, #e8823a); border-radius: 0 3px 3px 0; animation: bar-glow 2s ease-in-out infinite; }
+    .nav-icon { color: #20c997; animation: icon-bounce 2s ease-in-out infinite; }
+  }
 }
+@keyframes bar-glow { 0%, 100% { box-shadow: 0 0 6px rgba(32,201,151,0.5); } 50% { box-shadow: 0 0 14px rgba(32,201,151,0.9), 0 0 28px rgba(32,201,151,0.4); } }
+@keyframes icon-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
 
-a:hover{
-  color: #20c997 !important;
-}
+.nav-icon { font-size: 0.9rem; width: 16px; text-align: center; transition: all 0.3s ease; color: rgba(255,255,255,0.35); }
 
-a.active{
-  color: #20c997 !important;
-}
-
-.image-size{
-  width: 90%;
-}
-
-.br-g {
-  border: 8px solid #343a40;
+.social-links { display: flex; gap: 0.6rem; margin-top: auto; padding-top: 1.5rem; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4) !important;
+  font-size: 0.85rem; text-decoration: none; transition: all 0.35s ease; padding: 0 !important; margin: 0 !important;
+  &:hover { background: rgba(32,201,151,0.14); border-color: #20c997; color: #20c997 !important; transform: translateY(-5px) scale(1.1); box-shadow: 0 8px 24px rgba(32,201,151,0.3); padding-left: 0 !important; }
+  &.active { background: none; padding-left: 0 !important; &::before { display: none; } }
 }

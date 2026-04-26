@@ -6,8 +6,7 @@ import { MenuActionService } from '../../Services/menu-action.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements AfterViewInit{
-
+export class HomeComponent implements AfterViewInit {
 
   @ViewChild('section1') section1: ElementRef;
   @ViewChild('section2') section2: ElementRef;
@@ -16,13 +15,15 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('section5') section5: ElementRef;
   @ViewChild('section6') section6: ElementRef;
 
-  public currentActive = 0;
   public section1Offset: Number;
-  public section2Offset: Number ;
-  public section3Offset: Number ;
+  public section2Offset: Number;
+  public section3Offset: Number;
   public section4Offset: Number;
   public section5Offset: Number;
   public section6Offset: Number;
+  public year = new Date().getFullYear();
+
+  constructor(private menuActionService: MenuActionService) {}
 
   ngAfterViewInit() {
     this.section1Offset = this.section1.nativeElement.offsetTop;
@@ -31,29 +32,31 @@ export class HomeComponent implements AfterViewInit{
     this.section4Offset = this.section4.nativeElement.offsetTop;
     this.section5Offset = this.section5.nativeElement.offsetTop;
     this.section6Offset = this.section6.nativeElement.offsetTop;
+
+    setTimeout(() => {
+      const revealEls = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            revealObserver.unobserve(e.target);
+          }
+        }),
+        { threshold: 0.06, rootMargin: '0px 0px -60px 0px' }
+      );
+      revealEls.forEach(el => revealObserver.observe(el));
+    }, 400);
   }
-
-
-  constructor(private menuActionService: MenuActionService) {}
 
   @HostListener('window:scroll', ['$event'])
-  onSectionChange(sectionId: Event) {
-    if (window.pageYOffset >= this.section1Offset && window.pageYOffset < this.section2Offset) {
-      this.menuActionService.currentSection = "section1";
-    } else if (window.pageYOffset >= this.section2Offset && window.pageYOffset < this.section3Offset) {
-      this.menuActionService.currentSection = "section2";
-    } else if (window.pageYOffset >= this.section3Offset && window.pageYOffset < this.section4Offset) {
-      this.menuActionService.currentSection = "section3";
-    } else if (window.pageYOffset >= this.section4Offset && window.pageYOffset < this.section5Offset) {
-      this.menuActionService.currentSection = "section4";
-    } else if (window.pageYOffset >= this.section5Offset && window.pageYOffset < this.section6Offset) {
-      this.menuActionService.currentSection = "section5";
-    } else if (window.pageYOffset >= this.section6Offset) {
-      this.menuActionService.currentSection = "section6";
-    } else {
-      this.menuActionService.currentSection = "section1";
-    }
+  onSectionChange(event: Event) {
+    const y = window.pageYOffset;
+    if      (y >= this.section1Offset && y < this.section2Offset) this.menuActionService.currentSection = 'section1';
+    else if (y >= this.section2Offset && y < this.section3Offset) this.menuActionService.currentSection = 'section2';
+    else if (y >= this.section3Offset && y < this.section4Offset) this.menuActionService.currentSection = 'section3';
+    else if (y >= this.section4Offset && y < this.section5Offset) this.menuActionService.currentSection = 'section4';
+    else if (y >= this.section5Offset && y < this.section6Offset) this.menuActionService.currentSection = 'section5';
+    else if (y >= this.section6Offset)                            this.menuActionService.currentSection = 'section6';
+    else                                                           this.menuActionService.currentSection = 'section1';
   }
-
-
 }

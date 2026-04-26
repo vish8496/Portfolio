@@ -1,32 +1,63 @@
-<div class="section bg-dark-2">
-  <div class="header-text position-relative">
-    <h2 class="text-resize text-white w-100">Contact</h2>
-    <p class="text-ontop text-white w-100 mt p-vw">
-      Get in Touch
-      <span class="heading-separator-line border-bottom border-3 border-primary d-block mx-auto"></span>
-    </p>
+<div class="section bg-dark-1">
+
+  <div class="section-header reveal">
+    <span class="section-tag">Let's Talk</span>
+    <h2 class="section-bg-text">CONTACT</h2>
+    <h3 class="section-title">Get In Touch</h3>
+    <div class="section-line"></div>
   </div>
 
+  <div class="contact-layout">
 
-  <form [formGroup]="FormData" #formDirective="ngForm" (ngSubmit)="onSubmit(FormData)">
-    <div class="row">
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" id="name"
-        placeholder="Name" name="name" formControlName="name">
+    <!-- Info cards -->
+    <div class="contact-info">
+      <div class="info-card reveal reveal-left delay-1">
+        <div class="info-icon"><i class="bi bi-envelope-fill"></i></div>
+        <div>
+          <p class="info-card-label">Email</p>
+          <p class="info-card-value">vishalsmg97@gmail.com</p>
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <input type="email" class="form-control" id="email" placeholder="Email" name="email" formControlName="email">
+      <div class="info-card reveal reveal-left delay-2">
+        <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+        <div>
+          <p class="info-card-label">Location</p>
+          <p class="info-card-value">Karnataka, India</p>
+        </div>
+      </div>
+      <div class="info-card reveal reveal-left delay-3">
+        <div class="info-icon"><i class="bi bi-briefcase-fill"></i></div>
+        <div>
+          <p class="info-card-label">Status</p>
+          <p class="info-card-value">Open to Opportunities</p>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="form-group col-md-12">
-        <textarea rows="4" class="form-control" id="message" placeholder="Your message...."
-        name="message" formControlName="message"></textarea>
-      </div>
+
+    <!-- Form -->
+    <div class="contact-form-wrap reveal reveal-right delay-2">
+      <form [formGroup]="FormData" #formDirective="ngForm" (ngSubmit)="onSubmit(FormData)">
+        <div class="form-row-2">
+          <div class="field-wrap">
+            <input type="text" class="field" placeholder="Your Name"
+                   name="name" formControlName="name">
+          </div>
+          <div class="field-wrap">
+            <input type="email" class="field" placeholder="Your Email"
+                   name="email" formControlName="email">
+          </div>
+        </div>
+        <div class="field-wrap">
+          <textarea rows="5" class="field" placeholder="Your message…"
+                    name="message" formControlName="message"></textarea>
+        </div>
+        <button type="submit" class="send-btn">
+          <i class="bi bi-send-fill me-2"></i> Send Message
+          <span class="btn-shine"></span>
+        </button>
+      </form>
     </div>
-    <button type="submit" class="btn btn-clr text-white">Send message</button>
-  </form>
 
-
+  </div>
 
 </div>

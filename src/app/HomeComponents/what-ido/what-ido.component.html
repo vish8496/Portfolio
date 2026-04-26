@@ -1,25 +1,22 @@
 <div class="section bg-dark-2">
-  <div class="header-text position-relative">
-    <h2 class="text-resize text-white w-100">SERVICES</h2>
-    <p class="text-ontop text-white w-100 mt p-vw">
-      What I Do?
-      <span
-        class="heading-separator-line border-bottom border-3 border-primary d-block mx-auto"
-      ></span>
-    </p>
+
+  <div class="section-header reveal">
+    <span class="section-tag">My Expertise</span>
+    <h2 class="section-bg-text">SERVICES</h2>
+    <h3 class="section-title">What I Do</h3>
+    <div class="section-line"></div>
   </div>
 
-  <div class="row tp-3">
-    <div class="col-md-6 d-flex" *ngFor="let s of services">
-      <div class="icon-d">
-        <div class="icon d-flex jc-c bg-b br-10">
-          <i class="{{s.icon}}"></i>
-        </div>
+  <div class="services-grid">
+    <div class="service-card reveal reveal-scale" *ngFor="let s of services; let i = index"
+         [ngClass]="'delay-' + (i + 1)">
+      <span class="service-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+      <div class="service-icon-wrap">
+        <i class="{{ s.icon }}"></i>
       </div>
-      <div class="i-about p-1">
-        <h4 class="text-white ts-20">{{s.title}}</h4>
-        <p class="text-white-50">{{s.information}}</p>
-      </div>
+      <h4 class="service-title">{{ s.title }}</h4>
+      <p class="service-desc">{{ s.information }}</p>
     </div>
   </div>
+
 </div>

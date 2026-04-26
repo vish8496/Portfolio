@@ -8,31 +8,31 @@ import Typewriter from 't-writer.js';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  from:string;
+  from: string;
+
   constructor() {
     this.from = constant.location;
-   }
+  }
 
   ngOnInit() {
     const target = document.querySelector('.twTest');
     const writer = new Typewriter(target, {
       loop: true,
-      typeColor: '#6161c7',
-      cursorClassName: 'cursor'
-    })
+      typeColor: '#20c997',
+      cursorColor: '#20c997',
+      cursorClassName: 'cursor-span'
+    });
 
     writer
-    .type("I'm a Full Stack Web Developer.")
-    .rest(500)
-    .clear()
-    .type("I use Angular, .Net Core and MSSQL.")
-    .rest(500)
-    .clear()
-    .type("I have also worked on Azure DevOps.")
-    .rest(500)
-    .clear()
-    .start()
+      .type('Full Stack Web Developer')
+      .rest(1200)
+      .clear()
+      .type('Angular & .Net Core Expert')
+      .rest(1200)
+      .clear()
+      .type('Azure DevOps Practitioner')
+      .rest(1200)
+      .clear()
+      .start();
   }
-
-
 }

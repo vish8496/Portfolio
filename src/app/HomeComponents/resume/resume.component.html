@@ -1,47 +1,63 @@
 <div class="section bg-dark-1">
-  <div class="header-text position-relative">
-    <h2 class="text-resize text-white w-100">SUMMARY</h2>
-    <p class="text-ontop text-white w-100 mt p-vw">
-      Resume
-      <span class="heading-separator-line border-bottom border-3 border-primary d-block mx-auto"></span>
-    </p>
+
+  <div class="section-header reveal">
+    <span class="section-tag">My Background</span>
+    <h2 class="section-bg-text">RESUME</h2>
+    <h3 class="section-title">Resume</h3>
+    <div class="section-line"></div>
   </div>
 
-  <div class="row m-t-1">
-    <div class="col-md-6">
-      <mat-card class="bg-b text-white m-t-1 br-10" *ngFor="let c of colleges">
-        <mat-card-content>
-          <div class="p-1 fw-600">
-            <span class="date bg-g p-3-1 br-10">{{ c.date }}</span>
-            <h3 class="course ts-20 tp-1">{{ c.course }}</h3>
-            <p class="college text-green">{{ c.name }}</p>
+  <div class="resume-grid">
+    <!-- Education -->
+    <div class="resume-col">
+      <h4 class="col-heading reveal reveal-left delay-1"><i class="bi bi-mortarboard-fill"></i> Education</h4>
+      <div class="timeline">
+        <div class="timeline-item reveal reveal-left"
+             *ngFor="let c of colleges; let i = index"
+             [ngClass]="'delay-' + (i + 1)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-date">{{ c.date }}</span>
+            <h5 class="timeline-role">{{ c.course }}</h5>
+            <p class="timeline-org">{{ c.name }}</p>
           </div>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <mat-card class="bg-b text-white m-t-1 br-10" *ngFor="let e of experinces">
-        <mat-card-content>
-          <div class="p-1 fw-600">
-            <span class="date bg-g p-3-1 br-10">{{ e.date }}</span>
-            <h3 class="course ts-20 tp-1">{{ e.designation }}</h3>
-            <p class="college text-green">{{ e.company }}</p>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
 
-  <h2 class="skills text-white fw-600 m-tb-2">My Skills</h2>
-  <div class="row">
-    <div class="col-md-6 p-lr-2" *ngFor="let s of skills">
-      <p class="fw-500 text-start mb-2 text-light">
-        {{s.skill}} <span class="float-end">{{s.percentage}}%</span>
-      </p>
-      <div class="progress progress-sm mb-4 bg-b">
-        <div class="progress-bar" role="progressbar" aria-valuenow="s.skill" aria-valuemin="0" aria-valuemax="100"
-          [style.width.%]="s.percentage"></div>
+    <!-- Experience -->
+    <div class="resume-col">
+      <h4 class="col-heading reveal reveal-right delay-1"><i class="bi bi-briefcase-fill"></i> Experience</h4>
+      <div class="timeline">
+        <div class="timeline-item reveal reveal-right"
+             *ngFor="let e of experinces; let i = index"
+             [ngClass]="'delay-' + (i + 1)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-date">{{ e.date }}</span>
+            <h5 class="timeline-role">{{ e.designation }}</h5>
+            <p class="timeline-org">{{ e.company }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Skills -->
+  <div class="skills-section" [class.bars-visible]="barsVisible">
+    <h4 class="col-heading reveal"><i class="bi bi-bar-chart-fill"></i> Skills</h4>
+    <div class="skills-grid">
+      <div class="skill-item reveal" *ngFor="let s of skills; let i = index"
+           [ngClass]="'delay-' + ((i % 3) + 1)">
+        <div class="skill-header">
+          <span class="skill-name">{{ s.skill }}</span>
+          <span class="skill-pct">{{ s.percentage }}%</span>
+        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar" [style.width.%]="barsVisible ? s.percentage : 0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

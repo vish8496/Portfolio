@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './HomeComponents/home/home.component';
 import { WelcomeComponent } from './HomeComponents/welcome/welcome.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AboutMeComponent } from './HomeComponents/about-me/about-me.component';
 import { WhatIDoComponent } from './HomeComponents/what-ido/what-ido.component';
 import { PortfolioComponent } from './HomeComponents/portfolio/portfolio.component';
@@ -79,7 +78,6 @@ const customNotifierOptions: NotifierOptions = {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FlexLayoutModule,
     MatCardModule,
     MatTabsModule,
     HttpClientModule,

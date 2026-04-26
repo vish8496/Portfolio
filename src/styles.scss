@@ -1,15 +1,214 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "../node_modules/angular-notifier/styles";
-.bg-dark-1 {
-  background-color: #212529!important;
+
+/* ── Color tokens ── */
+:root {
+  --navy:      #060d1a;
+  --navy-2:    #080f20;
+  --navy-3:    #0c1528;
+  --navy-4:    #101c30;
+  --teal:      #20c997;
+  --teal-dim:  rgba(32,201,151,0.12);
+  --gold:      #e8823a;
+  --gold-dim:  rgba(232,130,58,0.12);
+  --purple:    #6161c7;
+  --white:     #ffffff;
+  --white-60:  rgba(255,255,255,0.60);
+  --white-30:  rgba(255,255,255,0.30);
+  --white-08:  rgba(255,255,255,0.08);
+  --white-04:  rgba(255,255,255,0.04);
 }
 
-.bg-dark-2 {
-  background-color: #343a40!important;
-}
-
-
-
+/* ── Base ── */
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+/* ── Section bg tokens ── */
+.bg-dark-1 { background-color: var(--navy-3) !important; }
+.bg-dark-2 { background-color: var(--navy-2) !important; }
+
+/* ── Topographic texture (subtle contour lines) ── */
+.bg-dark-1,
+.bg-dark-2,
+.topo-bg {
+  background-image:
+    radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.012) 60px,
+      rgba(255,255,255,0.012) 61px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.012) 60px,
+      rgba(255,255,255,0.012) 61px
+    ) !important;
+  background-size: 28px 28px, 120px 120px, 120px 120px !important;
+}
+
+/* ── Scroll progress bar ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+  background-size: 200% 100%;
+  z-index: 9999;
+  animation: progress-shimmer 3s linear infinite;
+}
+@keyframes progress-shimmer {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Scroll Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.reveal-left  { transform: translateX(-70px); opacity: 0; }
+.reveal.reveal-right { transform: translateX(70px);  opacity: 0; }
+.reveal.reveal-scale { transform: scale(0.82);        opacity: 0; }
+.reveal.reveal-top   { transform: translateY(-50px);  opacity: 0; }
+.reveal.reveal-flip  { transform: perspective(800px) rotateX(20deg) translateY(30px); opacity: 0; }
+
+.reveal.visible {
+  opacity: 1 !important;
+  transform: translateX(0) translateY(0) scale(1) rotateX(0deg) !important;
+}
+
+.delay-1 { transition-delay: 0.08s !important; }
+.delay-2 { transition-delay: 0.18s !important; }
+.delay-3 { transition-delay: 0.28s !important; }
+.delay-4 { transition-delay: 0.40s !important; }
+.delay-5 { transition-delay: 0.55s !important; }
+.delay-6 { transition-delay: 0.72s !important; }
+.delay-7 { transition-delay: 0.90s !important; }
+.delay-8 { transition-delay: 1.10s !important; }
+
+/* ── Section header shared ── */
+.section-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--teal);
+  display: block;
+  margin-bottom: 0.6rem;
+  animation: tag-glow 3s ease-in-out infinite;
+}
+@keyframes tag-glow {
+  0%, 100% { text-shadow: 0 0 8px rgba(32,201,151,0.4); }
+  50%       { text-shadow: 0 0 20px rgba(32,201,151,0.9), 0 0 40px rgba(32,201,151,0.3); }
+}
+
+.section-bg-text {
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.section-line {
+  width: 40px; height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  border-radius: 2px;
+  margin: 0 auto;
+  animation: line-flow 3s ease infinite;
+  background-size: 200% 100%;
+}
+@keyframes line-flow {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Section number indicator ── */
+.section-number {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── Keyframes library ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(32,201,151,0.25); }
+  50%       { box-shadow: 0 0 32px rgba(32,201,151,0.65), 0 0 60px rgba(232,130,58,0.15); }
+}
+@keyframes shimmer-slide {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes border-flow {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+@keyframes dot-ping {
+  0%   { transform: scale(1);   opacity: 1; }
+  80%  { transform: scale(2.5); opacity: 0; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+@keyframes card-rise {
+  from { transform: translateY(40px) scale(0.95); opacity: 0; }
+  to   { transform: translateY(0)    scale(1);    opacity: 1; }
+}
+@keyframes slide-in-left {
+  from { transform: translateX(-30px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { transform: translateX(30px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--teal), var(--gold));
+  border-radius: 2px;
+}
+
+/* ── Selection ── */
+::selection { background: rgba(32,201,151,0.2); color: #fff; }
